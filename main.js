@@ -26,7 +26,6 @@ app.get('/contact',(req,res) => {
 
 app.post('/form',(req,res) => {
     console.log(req.body)    
-    //This is the passing Conditions
     passCondition = (req.body.full_name!='') & (req.body.phone_number!= '') & (req.body.father_name!='') & (req.body.address!='      ') & (req.body.email_id!='') & (req.body.dropdown!='none')
     if(passCondition){
             if(req.body.declaration != 'on')
