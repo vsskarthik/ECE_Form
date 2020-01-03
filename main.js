@@ -26,28 +26,32 @@ app.get('/contact',(req,res) => {
 
 app.post('/form',(req,res) => {
     //alert('Form Submitted.....\nThank you So Much...')
-    console.log(req.body)
-    if(req.body.declaration != 'on')
-    { res.end('You Have Not Checked The declaration button.....\nPlease go back and Check it')}
-    else{
-        name=req.body.full_name  
-        mobile=parseInt(req.body.phone_number) 
-        fathersName=req.body.father_name   
-        address=req.body.address   
-        email=req.body.email_id      
-        gender=req.body.male
-        courseName=req.body.dropdown
-        courseType=req.body.normal
-        try{
-            dbOps.insert([name,mobile,fathersName,address,email,gender,courseName,courseType])
-        }
-        catch{
-            console.log('error')
-        }
-    }
-    res.sendFile('conf.html', {root: './files'})
-    
-})
+    console.log(req.body)    
+    passCondition = (req.body.full_name!='') & (req.body.phone_number!= '') & (req.body.father_name!='') & (req.body.address!='      ') & (req.body.email_id!='') & (req.body.dropdown!='none')
+    if(passCondition){
+            if(req.body.declaration != 'on')
+            { res.end('You Have Not Checked The declaration button.....\nPlease go back and Check it')}
+            else{
+                name=req.body.full_name  
+                mobile=parseInt(req.body.phone_number) 
+                fathersName=req.body.father_name   
+                address=req.body.address   
+                email=req.body.email_id      
+                gender=req.body.male
+                courseName=req.body.dropdown
+                courseType=req.body.normal
+                try{
+                    dbOps.insert([name,mobile,fathersName,address,email,gender,courseName,courseType])
+                }
+                catch{
+                    console.log('error')
+                }
+            }
+            res.sendFile('conf.html', {root: './files'})
+        }  
+    else
+    {res.end('Invalid input porovided...\nPlease go back and enter the valid Input')}    
+    })
 /*
 {
   full_name: 'asd',      
