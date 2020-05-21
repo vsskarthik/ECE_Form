@@ -1,5 +1,6 @@
 // - Add Feedback System
 // -Add Table Creation Function
+// MySQL used
 
 var ops ={}
 var mysql = require('mysql')
